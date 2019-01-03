@@ -17,14 +17,16 @@
 
 За да се възползваме напълно от всички възможности и да можем да разширим нашия текстов редактор Sublime трябва да инсталираме Мениджъра на пакети (Package Control). След като го инсталираме ще можем да имаме достъп до различни пакети, които от своя страна можем да инсталираме, премахваме или обновяваме. Можете да разгледате различните пакети и какво включва всеки от тях на този [сайт](https://packagecontrol.io/).
 
-## 1. За да инсталираме Мениджъра на пакети, трябва да влезем в конзолата на Sublime, а това става като изберем View > Show Console ,за да я отворим. Отиваме на [адреса](https://packagecontrol.io/installation#st3) и копираме кода, който е показан там :
+## 1.Инсталиране на Мениджъра на пакети (Package Control)
+За да инсталираме Мениджъра на пакети, трябва да влезем в конзолата на Sublime, а това става като изберем View > Show Console ,за да я отворим. Отиваме на [адреса](https://packagecontrol.io/installation#st3) и копираме кода, който е показан там :
 ```python
 import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) 
 ```
 
 Пействаме го в конзолата, натискаме клавиша Enter и чакаме инсталацията да завърши след което рестартираме нашия текстов редактор. 
 
-## 2. Вече можете инсталирате всеки от пакетите, които видяхте по-рано. За да го направите използвайте клавишната комбинация Ctrl+Shift+P. След това напишете install докато се появи Package Control: Install Package. Натиснете клавиша Enter и може да изберете любимите си пакети, за да бъдат инсталирани. 
+## 2. Инсталиране на пакети чрез Мениджъра на пакети (Package Control)
+Вече можете инсталирате всеки от пакетите, които видяхте по-рано. За да го направите използвайте клавишната комбинация Ctrl+Shift+P. След това напишете install докато се появи Package Control: Install Package. Натиснете клавиша Enter и може да изберете любимите си пакети, за да бъдат инсталирани. 
 
 Списък на някои команди:
   
