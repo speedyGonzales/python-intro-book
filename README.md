@@ -223,11 +223,11 @@ varfunc('hello', 1, 2, 3, name='Bob', age=12)
 
 ### методи на списъци
 
-.index(element) - Индекса на първото срещане на element в списъка или гърми с ValueError
-.count(element) - Броят срещания на element в списъка
-.append(element) - Добавя element в края на списъка
-.extend(elements) - Добавя елементите на elements в списъка (като + ама по-бързо)
-.sort() - Сещате се
+* .index(element) - Индекса на първото срещане на element в списъка или гърми с ValueError
+* .count(element) - Броят срещания на element в списъка
+* .append(element) - Добавя element в края на списъка
+* .extend(elements) - Добавя елементите на elements в списъка (като + ама по-бързо)
+* .sort() - Сортиране на списъка
 
 
 ## 2. Речник - dict (dict = ключове/имена, зад които стоят стойности (без подредба))
@@ -302,4 +302,6 @@ varfunc('hello', 1, 2, 3, name='Bob', age=12)
 * namedtuple - кортеж с именовани полета
 
 Използване: 
+```python
 from collections import deque
+```
