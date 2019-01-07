@@ -73,7 +73,63 @@ GitGutter показва малки икони в началото на вски
 * Ctrl + F - търсене в текущия файл
 * Ctrl + Shift+ K - Изтриване на текущия ред
 * Ctrl + (ляв бутон намишката) Позволява създаването и използването на много курсори едновременно, чрез които можем да редактираме едновременно на различни места в документа.
+```js
+{
+    // Colors
+    "color_scheme": "Packages/Tomorrow Color Schemes/Tomorrow-Night.tmTheme",
+    "theme": "Soda Dark.sublime-theme",
 
+    // Font
+    "font_face": "Ubuntu Mono",
+    "font_size": 16.0,
+    "font_options": ["subpixel_antialias", "no_bold"],
+    "line_padding_bottom": 0,
+    "line_padding_top": 0,
+
+    // Cursor style - no blinking and slightly wider than default
+    "caret_style": "solid",
+    "wide_caret": true,
+
+    // Editor view look-and-feel
+    "draw_white_space": "all",
+    "fold_buttons": false,
+    "highlight_line": true,
+    "auto_complete": false,
+    "show_minimap": false,
+    "show_full_path": true,
+
+    // Editor behavior
+    "scroll_past_end": false,
+    "highlight_modified_tabs": true,
+    "find_selected_text": true,
+
+    // Word wrapping - follow PEP 8 recommendations
+    "rulers": [ 72, 79 ],
+    "word_wrap": true,
+    "wrap_width": 80,
+
+    // Whitespace - no tabs, trimming, end files with \n
+    "tab_size": 4,
+    "translate_tabs_to_spaces": true,
+    "trim_trailing_white_space_on_save": true,
+    "ensure_newline_at_eof_on_save": true,
+
+    // Sidebar - exclude distracting files and folders
+    "file_exclude_patterns":
+    [
+        ".DS_Store",
+        "*.pid",
+        "*.pyc"
+    ],
+    "folder_exclude_patterns":
+    [
+        ".git",
+        "__pycache__",
+        "env",
+        "env3"
+    ]
+}
+``` 
 
 #                                 Какво е Virtualenv и защо трябва да знаем какво е 
 
@@ -81,35 +137,35 @@ GitGutter показва малки икони в началото на вски
 
 ## 1. Как да проверим, че имаме инсталиран virtualenv 
  Отиваме в терминала и пишем :
- ```bash  
+ ```sh  
  virtualenv --version
 ```
 ## 2. Как да инсталираме virtualenv 
  Отиваме в терминала и пишем една от следните команди:
-```bash  
+```sh  
  sudo apt-get install python-virtualenv
  sudo easy_install virtualenv
  sudo pip install virtualenv
 ```
 ## 3. Как да използваме virtualenv 
 Отиваме в терминала и пишем :
-```bash  
+```sh  
   mkdir ~/env  # Създай папка с име env
   virtualenv ~/env/new_app # Създай проект с име new_app в папка env
   cd ~/env/new_app/bin # Влез в папката с помощни скриптове
   source activate # Използвай скрипта за стартиране на контейнер 
 ```
 Последните две команди може да ги слеем:
-```bash  
+```sh  
   source new_app/bin/activate
 ```
 ## 4. Инсталиране на пакети в virtualenv 
 Отиваме в терминала и пишем :
-```bash  
+```sh  
   pip install flask # инсталирай модула flask в контейнера, в ляво трябва да показва в терминала, че сме в контейнер
 ```
 ## 5. Излизане от средата на контейнера: 
-```bash  
+```sh  
  source new_app/bin/deactivate
 ```
 
