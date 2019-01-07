@@ -373,6 +373,280 @@ a[-3::-1]  # всичко, без последните два елелемент
 from collections import deque
 ```
 
+#                                                Python magic или Питонска магия
+
+itertools е питонски модул, който може да ни накара да повярваме, че магията съществува или иначе казано чрез него имаме достатъп до доста благинки, които са написани като бързи и ефикасни спрямо паметта методи. Обикновено функциите от този модул връщат итеруеми множества. 
+
+## count(start=0, step=1)
+count е функция итератор, която ще ни връща безкрайно итеруемо множество започващо от start, със стъпка step. Ако не са зададени стойности на параметрите се взимат показаните по-горе по подразбиране. Обикновено използваме count във for цикъл с терминиращо условие: 
+```python
+from itertools import count
+ for i in count(10):
+     if i > 20: 
+        break
+     else:
+         print(i)
+#Връща числата 10-20
+```
+
+или използвайки islice(функция, показва колко пъти да викаме итеруемото множество) :
+```python
+from itertools import islice
+for i in islice(count(10), 5):
+    print(i)
+#Връща числата 10-14
+```
+
+## cycle(iterable)
+cycle е функция итератор, която ще ни връща безкрайно итеруемо множество повтаряйки безкрайно стойностите от iterable параметъра си: 
+```python
+from itertools import cycle
+count = 0
+for item in cycle('XYZ'):
+     if count > 7:
+         break
+     print(item)
+     count += 1
+ ```
+Друг начин за използване е следния пример: 
+```python
+polys = ['triangle', 'square', 'pentagon', 'rectangle']
+iterator = cycle(polys)
+next(iterator)
+# Ще върне 'triangle'
+next(iterator)
+# Ще върне 'square'
+```
+
+Тука използваме оператора next, за да върнем следващия елемент от итеруемото множество. 
+
+##  repeat(object[, times])
+repeat е функция итератор, която ще ни връща object безкраен брой , пъти освен ако няма заден параметър times.
+```python
+from itertools import repeat
+iterator = repeat(5, 5)
+next(iterator)
+```
+
+##  accumulate(iterable[, func])
+accumulate - функция, която акумулира сумата на предходните елементи и следващия от итеруемо множество
+```python
+from itertools import accumulate
+list(accumulate(range(10)))
+[0, 1, 3, 6, 10, 15, 21, 28, 36, 45]
+```
+
+## chain(*iterables)
+
+## compress(data, selectors)
+compress е много полезна функция, която компресира едно итеруемо множество използвайки за филтър второ итеруемо множество:
+```python
+from itertools import compress
+letters = 'ABCDEFG'
+bools = [True, False, True, True, False]
+list(compress(letters, bools))
+['A', 'C', 'D']
+```
+
+## dropwhile(predicate, iterable)
+dropwhile е оператор, който ще маха елементи от итеруемото множество докато функцията предикат не върне истина (True).Зaради това върнатите елементи, започват веднага след първото връщане на неистина (False) от предикатната функция. 
+```python
+from itertools import dropwhile
+list(dropwhile(lambda x: x<5, [1,4,6,4,1]))
+[6, 4, 1] # Първото връщане на неистина е при 6
+
+from itertools import dropwhile
+def greater_than_five(x):
+     return x > 5 
+ 
+list(dropwhile(greater_than_five, [6, 7, 8, 9, 1, 2, 3, 10]))
+[1, 2, 3, 10] # Първото връщане на неистина е при 1
+```
+
+##  filterfalse(predicate, iterable)
+filterfalse  функция, която ще върне от итеруемото множество, само тези елементи, за които предикатната функция ще върне неистина (False).
+```python
+from itertools import filterfalse
+def greater_than_five(x):
+     return x > 5 
+ 
+list(filterfalse(greater_than_five, [6, 7, 8, 9, 1, 2, 3, 10]))
+[1, 2, 3]
+```
+
+## groupby(iterable, key=None)
+groupby връща последователни ключове и групи от итеруемо множество. 
+```python
+from itertools import groupby
+ 
+vehicles = [('Ford', 'Taurus'), ('Dodge', 'Durango'),
+            ('Chevrolet', 'Cobalt'), ('Ford', 'F150'),
+            ('Dodge', 'Charger'), ('Ford', 'GT')]
+ 
+sorted_vehicles = sorted(vehicles)
+ 
+for key, group in groupby(sorted_vehicles, lambda make: make[0]):
+    for make, model in group:
+        print('{model} is made by {make}'.format(model=model,make=make))
+
+#Cobalt is made by Chevrolet
+# 
+#Charger is made by Dodge
+#Durango is made by Dodge
+# 
+#F150 is made by Ford
+#GT is made by Ford
+#Taurus is made by Ford
+```
+##  starmap(function, iterable)
+starmap е функция, която ни позволява да прилагаме функция върху списък с аргументи например, което я превръща в прекрасен инструмент за изчисления. 
+```python
+from itertools import starmap
+def add(a, b):
+    return a+b
+ 
+for item in starmap(add, [(2,3), (4,5)]):
+     print(item) 
+#5=2+3
+#9=4+5
+
+##  takewhile(predicate, iterable)
+takewhile ще върне итеруемо множесто от елементи от друго итеруемо множесто докато предикатната функция за елементите връща истина (True)
+
+from itertools import takewhile
+list(takewhile(lambda x: x<5, [1,4,6,4,1]))
+[1, 4]
+```
+## tee(iterable, n=2)
+tee е функция, която ни позволява да имаме много независими един от друг итератори върху едно и също итеруемо множество.
+```python
+from itertools import tee
+data = 'ABCDE'
+iter1, iter2 = tee(data)
+for item in iter1:
+     print(item)
+```
+##  zip_longest(*iterables, fillvalue=None)
+zip_longest е функция, която опакова две итеруеми спрямо дължината на по-дългото. 
+```python
+from itertools import zip_longest
+for item in zip_longest('ABCD','xy',fillvalue='BLANK'):
+     print (item)
+
+#('A', 'x')
+#('B', 'y')
+#('C', 'BLANK')
+#('D', 'BLANK')
+```
+##  combinations(iterable, r)
+combinations ни връща кобинациите с дължина r от различните елементи на итеруемо множество: 
+```python
+from itertools import combinations
+list(combinations('WXYZ', 2))
+#[('W', 'X'), ('W', 'Y'), ('W', 'Z'), ('X', 'Y'), ('X', 'Z'), ('Y', 'Z')]
+```
+##  combinations_with_replacement(iterable, r)
+combinations_with_replacement ни връща кобинациите с повторение с дължина r от различните елементи на итеруемо множество: 
+```python
+from itertools import combinations_with_replacement
+list=[]
+for item in combinations_with_replacement('WXYZ', 2):
+     list.add(''.join(item))
+#[WW,WX,WY,WZ,XX,XY,XZ,YY,YZ,ZZ]
+```
+
+##  product(*iterables, repeat=1)
+product е готина функция, която ни позволява да правим Декартово произведение от множества от входни итеруеми:
+```python
+from itertools import product
+arrays = [(-1,1), (-3,3), (-5,5)]
+cp = list(product(*arrays))
+
+#[(-1, -3, -5),(-1, -3, 5), (-1, 3, -5),
+# (-1, 3, 5), (1, -3, -5),(1, -3, 5),
+# (1, 3, -5), (1, 3, 5)]
+```
+##  permutations(iterable, r)
+permutations е функция, която ще ни върне пермутации с дължина r от елементи от итеруемо множество:
+```python
+from itertools import permutations
+list=[]
+for item in permutations('WXYZ', 2):
+     list.add(''.join(item))
+#[WX,WY,WZ,XW,XY,XZ,YW,YX,YZ,ZW,ZX,ZY]
+```
+Примери :
+1. Комбиниране на елементи: 
+```python
+list(zip([1, 2, 3], ['a', 'b', 'c']))
+[(1, 'a'), (2, 'b'), (3, 'c')]
+```
+2. Връщане на дължината на низове
+```python
+list(map(len, ['abc', 'de', 'fghi']))
+[3, 2, 4]
+```
+3. Сумиране на интеруеми:
+```python
+list(map(sum, zip([1, 2, 3], [4, 5, 6])))
+[5, 7, 9] # 5=1+4, 7=2+5, 9=3+6
+```
+4. Групиране на елементи:
+```python
+nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+def naive_grouper(inputs, n):
+    num_groups = len(inputs) // n
+    return [tuple(inputs[i*n:(i+1)*n]) for i in range(num_groups)]
+naive_grouper(nums, 2)
+[(1, 2), (3, 4), (5, 6), (7, 8), (9, 10)]
+```
+
+5. Опаковане:
+```python
+import itertools as it
+x = [1, 2, 3, 4, 5]
+y = ['a', 'b', 'c']
+list(zip(x, y))
+[(1, 'a'), (2, 'b'), (3, 'c')]
+list(it.zip_longest(x, y))
+[(1, 'a'), (2, 'b'), (3, 'c'), (4, None), (5, None)]
+```
+
+6. Brute Force или грубата сила:
+
+Имаме 3 банкноти по $20 долара, 5 по $10 долара, 2 по $5 долара, 5 по $1 долар. По колко начина можем да развалим(разбием на дребни банкноти) банкнота от $100 долара. 
+
+```python
+bills = [20, 20, 20, 10, 10, 10, 10, 10, 5, 5, 1, 1, 1, 1, 1]
+makes_100 = []
+for n in range(1, len(bills) + 1):
+     for combination in it.combinations(bills, n):
+         if sum(combination) == 100:
+            makes_100.append(combination)
+set(makes_100)
+
+{(20, 20, 10, 10, 10, 10, 10, 5, 1, 1, 1, 1, 1),
+ (20, 20, 10, 10, 10, 10, 10, 5, 5),
+ (20, 20, 20, 10, 10, 10, 5, 1, 1, 1, 1, 1),
+ (20, 20, 20, 10, 10, 10, 5, 5),
+ (20, 20, 20, 10, 10, 10, 10)}
+```
+
+7. Използване на рекурентна връзка
+Нека имплементираме итеруема функция за Фибуначи.
+```python
+def fibs():
+    a, b = 0, 1
+    while True:
+        yield a
+        a, b = b, a + b
+```
+Която може да използваме по следния начин:
+```python
+list(next(fibs) for _ in range(8))
+[0, 1, 1, 2, 3, 5, 8, 13]
+```
+
 #                                                      Регулярни изрази и Python 
 
 ## 1. Въведение в регулярните изрази 
