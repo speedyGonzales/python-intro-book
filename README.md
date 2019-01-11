@@ -447,6 +447,103 @@ a[-3::-1]  # всичко, без последните два елелемент
 ```python
 from collections import deque
 ```
+#                                                Изключения
+
+Изключения ще наричаме някоя извънредна ситуация, която е възниквала при изпълнение на вашата програма. Например опитвате се да четете файл и откривате, че той не съществува. Или без да искате изтривате файла докато програмта ви все още го чете. Такива ситуации се наричат изключения. 
+
+Забележете, че изключението е съвсем различно от грешката. Например, ако вместо print сте написали грешно Print, това е грешка.
+
+Обработване на изключения
+
+Нека гледаме на на изключенията като на горещ картоф, някой трябва да го хване и да го обработи. Това се прави с конструкцията try..except, която можем да разгледаме в примера по-долу: 
+
+
+```python
+# import module sys to get the type of exception
+import sys
+
+randomList = ['a', 0, 2]
+
+for entry in randomList:
+    try:
+        print("The entry is", entry)
+        r = 1/int(entry)
+        break
+    except:
+        print("Oops!",sys.exc_info()[0],"occured.")
+        print("Next entry.")
+        print()
+print("The reciprocal of",entry,"is",r)
+```
+Изход:
+
+The entry is a
+Oops! <class 'ValueError'> occured.
+Next entry.
+
+The entry is 0
+Oops! <class 'ZeroDivisionError'> occured.
+Next entry.
+
+The entry is 2
+The reciprocal of 2 is 0.5
+
+## Как работи тази конструкция 
+
+Когато знаем, че при дадена операция, например четенето на файл може да възникне извънредна ситуация трябва да сложим кода си в try блок и и след това да обратим възможните изключения, да хванем горещите картофи, в except блок. Except клаузата може да обработи само едно точно определено изключение/ извънреден случай. Забележете, че винаги трябва да използваме поне една except клауза след всеки try блок. Иначе би било безсмиселно да използваме try блок-а. 
+```python
+def linux_interaction():
+    assert ('linux' in sys.platform), "Function can only run on Linux systems."
+    print('Doing something.')
+
+try:
+    linux_interaction()
+except:
+    print('Linux function was not executed')
+```
+#### Понякога искаме да хванем точно определено изключение:
+```python
+try:
+    linux_interaction()
+except AssertionError as error:
+    print(error)
+    print('The linux_interaction() function was not executed')
+```
+#### Понякога може да искаме да иползваме и else клауза веднага след try...except блок-а.
+```python
+try:
+    linux_interaction()
+except AssertionError as error:
+    print(error)
+else:
+    print('Executing the else clause.')
+```
+#### А понякога може да искаме да не обработваме изключението:
+```python
+try:
+    linux_interaction()
+except:
+    pass
+```
+## Try ... Finally 
+
+Finally клаузата винаги се изпълнява независимо дали има възникване на изключение или не. Тя често се използва, за да се освободят използваните ресурси. 
+```python
+try:
+   f = open("test.txt",encoding = 'utf-8')
+   for line in f:
+        # perform file operations
+finally:
+   f.close()
+```
+## With ...
+
+Използването на ресурси в try клауза и освобождаването им във finally клауза се среща доста често затова има и по-кратка версия да се напише горното:
+```python
+with open("test.txt",encoding = 'utf-8') as f:
+    for line in f:
+        # perform file operations
+```
 
 #                                                       Вход и изход с конзолата
 
