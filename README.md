@@ -1051,8 +1051,8 @@ list(next(fibs) for _ in range(8))
 | $             |Край на низа(терминиращ оператор)|
 | ^             |Начало на стринга|
 | ab|cd         |Съвпадение на ab или de|
-| [ab-d]          |One character of: a, b, c, d|
-| [^ab-d]         |One character except: a, b, c, d|
+| [ab-d]        |One character of: a, b, c, d|
+| [^ab-d]       |One character except: a, b, c, d|
 | ()            |Items within parenthesis are retrieved|
 | (a(bc))       |Items within the sub-parenthesis are retrieved|
 
