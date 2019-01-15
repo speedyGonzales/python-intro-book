@@ -1,4 +1,3 @@
-
 #                                   Настройване на текстов редактор за работа с Python 
 
 ## 1.Въведение
@@ -1051,8 +1050,8 @@ list(next(fibs) for _ in range(8))
 | $             |Край на низа(терминиращ оператор)|
 | ^             |Начало на стринга|
 | ab|cd         |Съвпадение на ab или de|
-| [ab-d]        |One character of: a, b, c, d|
-| [^ab-d]       |One character except: a, b, c, d|
+| [ab-d]	      |One character of: a, b, c, d|
+| [^ab-d]	      |One character except: a, b, c, d|
 | ()            |Items within parenthesis are retrieved|
 | (a(bc))       |Items within the sub-parenthesis are retrieved|
 
@@ -1139,7 +1138,6 @@ def not_exactly_add(self, a, b):
 A.add = not_exactly_add
 
 print(a.add(3, 3))
-
 ```
 
 ## 7. Какво са генераторите
